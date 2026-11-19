@@ -1,0 +1,868 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AutoNova | Seu próximo carro está aqui</title>
+
+<style>
+
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f5f7fa;
+    color: #172033;
+}
+
+/* CORES */
+:root {
+    --primary: #10233f;
+    --secondary: #ff6b35;
+    --light: #ffffff;
+    --gray: #687386;
+}
+
+/* MENU */
+header {
+    background: var(--primary);
+    padding: 20px 8%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    font-size: 27px;
+    font-weight: bold;
+    color: white;
+}
+
+.logo span {
+    color: var(--secondary);
+}
+
+nav {
+    display: flex;
+    gap: 30px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    transition: .3s;
+}
+
+nav a:hover {
+    color: var(--secondary);
+}
+
+.header-button {
+    background: var(--secondary);
+    padding: 12px 20px;
+    border-radius: 6px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* BANNER */
+.hero {
+    min-height: 550px;
+    padding: 100px 8%;
+    display: flex;
+    align-items: center;
+    background:
+    linear-gradient(90deg, rgba(9,25,48,.95), rgba(9,25,48,.45)),
+    url("https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1800&q=85");
+    background-size: cover;
+    background-position: center;
+    color: white;
+}
+
+.hero-content {
+    max-width: 620px;
+}
+
+.hero h1 {
+    font-size: 52px;
+    line-height: 1.15;
+    margin-bottom: 22px;
+}
+
+.hero h1 span {
+    color: var(--secondary);
+}
+
+.hero p {
+    font-size: 18px;
+    line-height: 1.7;
+    color: #e0e7f0;
+    margin-bottom: 30px;
+}
+
+.hero-button {
+    display: inline-block;
+    background: var(--secondary);
+    color: white;
+    text-decoration: none;
+    padding: 16px 28px;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: .3s;
+}
+
+.hero-button:hover {
+    background: #e85522;
+    transform: translateY(-3px);
+}
+
+/* BUSCA */
+.search-section {
+    padding: 0 8%;
+    margin-top: -45px;
+    position: relative;
+}
+
+.search-box {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 35px rgba(0,0,0,.10);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr) auto;
+    gap: 15px;
+    align-items: end;
+}
+
+.search-field label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 13px;
+}
+
+.search-field select {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background: white;
+    color: #555;
+}
+
+.search-button {
+    padding: 15px 25px;
+    border: none;
+    background: var(--secondary);
+    color: white;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* SEÇÕES */
+section {
+    padding: 85px 8%;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.section-title h2 {
+    font-size: 34px;
+    color: var(--primary);
+    margin-bottom: 12px;
+}
+
+.section-title p {
+    color: var(--gray);
+    font-size: 16px;
+}
+
+/* VEÍCULOS */
+.cars-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.car-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0,0,0,.06);
+    transition: .3s;
+}
+
+.car-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 12px 25px rgba(0,0,0,.12);
+}
+
+.car-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+.car-info {
+    padding: 22px;
+}
+
+.car-info h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.car-details {
+    color: var(--gray);
+    font-size: 13px;
+    margin-bottom: 20px;
+}
+
+.car-price {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.price {
+    font-size: 23px;
+    font-weight: bold;
+    color: var(--primary);
+}
+
+.car-price a {
+    text-decoration: none;
+    background: var(--primary);
+    color: white;
+    padding: 11px 15px;
+    border-radius: 5px;
+    font-size: 13px;
+}
+
+/* BENEFÍCIOS */
+.benefits {
+    background: var(--primary);
+    color: white;
+}
+
+.benefits .section-title h2 {
+    color: white;
+}
+
+.benefits .section-title p {
+    color: #c5cfdd;
+}
+
+.benefit-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.benefit-card {
+    text-align: center;
+    padding: 35px 25px;
+    background: rgba(255,255,255,.07);
+    border-radius: 12px;
+    transition: .3s;
+}
+
+.benefit-card:hover {
+    background: rgba(255,255,255,.13);
+}
+
+.benefit-icon {
+    font-size: 42px;
+    margin-bottom: 20px;
+}
+
+.benefit-card h3 {
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+.benefit-card p {
+    color: #c5cfdd;
+    line-height: 1.7;
+    font-size: 14px;
+}
+
+/* COMO FUNCIONA */
+.steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 35px;
+    text-align: center;
+}
+
+.step-number {
+    background: var(--secondary);
+    color: white;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 23px;
+    font-weight: bold;
+    margin: 0 auto 20px;
+}
+
+.step h3 {
+    margin-bottom: 12px;
+    color: var(--primary);
+}
+
+.step p {
+    color: var(--gray);
+    line-height: 1.6;
+}
+
+/* CTA */
+.cta {
+    background:
+    linear-gradient(rgba(16,35,63,.92), rgba(16,35,63,.92)),
+    url("https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1600&q=80");
+    background-size: cover;
+    background-position: center;
+    text-align: center;
+    color: white;
+}
+
+.cta h2 {
+    font-size: 38px;
+    margin-bottom: 18px;
+}
+
+.cta p {
+    color: #d3dbe6;
+    margin-bottom: 30px;
+    font-size: 17px;
+}
+
+/* RODAPÉ */
+footer {
+    background: #09182d;
+    color: white;
+    padding: 50px 8% 20px;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+footer h3 {
+    margin-bottom: 18px;
+}
+
+footer p, footer a {
+    color: #b8c3d2;
+    font-size: 14px;
+    line-height: 1.8;
+    text-decoration: none;
+}
+
+.footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.copyright {
+    border-top: 1px solid #29384c;
+    text-align: center;
+    padding-top: 20px;
+    color: #8996a8;
+    font-size: 13px;
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 900px) {
+
+    .cars-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .search-box {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .benefit-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+
+    header {
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    nav {
+        width: 100%;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+
+    .header-button {
+        display: none;
+    }
+
+    .hero {
+        padding: 75px 7%;
+        min-height: 480px;
+    }
+
+    .hero h1 {
+        font-size: 37px;
+    }
+
+    .hero p {
+        font-size: 16px;
+    }
+
+    .search-box {
+        grid-template-columns: 1fr;
+    }
+
+    .cars-grid,
+    .benefit-grid,
+    .steps,
+    .footer-content {
+        grid-template-columns: 1fr;
+    }
+
+    section {
+        padding: 65px 7%;
+    }
+
+    .section-title h2 {
+        font-size: 28px;
+    }
+
+    .cta h2 {
+        font-size: 29px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- MENU -->
+<header>
+
+    <div class="logo">
+        Auto<span>Nova</span>
+    </div>
+
+    <nav>
+        <a href="#inicio">Início</a>
+        <a href="#veiculos">Veículos</a>
+        <a href="#vantagens">Vantagens</a>
+        <a href="#sobre">Como funciona</a>
+    </nav>
+
+    <a href="#anunciar" class="header-button">
+        Anunciar veículo
+    </a>
+
+</header>
+
+<!-- BANNER PRINCIPAL -->
+<div class="hero" id="inicio">
+
+    <div class="hero-content">
+
+        <h1>
+            Seu próximo carro
+            está a um <span>clique.</span>
+        </h1>
+
+        <p>
+            Comprar e vender veículos nunca foi tão fácil.
+            Encontre as melhores oportunidades em uma plataforma
+            digital, segura e feita para você.
+        </p>
+
+        <a href="#veiculos" class="hero-button">
+            Encontrar meu carro →
+        </a>
+
+    </div>
+
+</div>
+
+<!-- BUSCA -->
+<div class="search-section">
+
+    <div class="search-box">
+
+        <div class="search-field">
+            <label>Marca</label>
+            <select>
+                <option>Todas as marcas</option>
+                <option>BMW</option>
+                <option>Porsche</option>
+                <option>Chevrolet</option>
+                <option>Volkswagen</option>
+                <option>Fiat</option>
+                <option>Toyota</option>
+                <option>Hyndai</option>
+                <option>Jeep</option>
+            </select>
+        </div>
+
+        <div class="search-field">
+            <label>Modelo</label>
+            <select>
+                <option>Todos os modelos</option>
+                <option>330i</option>
+                <option>911</option>
+                <option>Camaro</option>
+                <option>Onix</option>
+                <option>Passat</option>
+                <option>Corolla</option>
+                <option>HB20</option>
+                <option>Compass</option>
+            </select>
+        </div>
+
+        <div class="search-field">
+            <label>Faixa de preço</label>
+            <select>
+                <option>Qualquer preço</option>
+                <option>Até R$ 50 mil</option>
+                <option>R$ 50 mil a R$ 100 mil</option>
+                <option>R$ 100 mil a R$ 150 mil</option>
+            </select>
+        </div>
+
+        <button class="search-button"
+        onclick="document.getElementById('veiculos').scrollIntoView({behavior:'smooth'})">
+            Buscar veículos
+        </button>
+
+    </div>
+
+</div>
+
+<!-- VEÍCULOS -->
+<section id="veiculos">
+
+    <div class="section-title">
+
+        <h2>Veículos em destaque</h2>
+
+        <p>
+            Confira algumas das melhores oportunidades disponíveis.
+        </p>
+
+    </div>
+
+    <div class="cars-grid">
+
+        <!-- CARRO 1 -->
+        <div class="car-card">
+
+            <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=900&q=80">
+
+            <div class="car-info">
+
+                <h3>Chevrolet Camaro</h3>
+
+                <p class="car-details">
+                    2022 • Automático • Gasolina
+                </p>
+
+                <div class="car-price">
+
+                    <span class="price">R$ 289.900</span>
+
+                    <a href="#anunciar">Ver detalhes</a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- CARRO 2 -->
+        <div class="car-card">
+
+            <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=900&q=80">
+
+            <div class="car-info">
+
+                <h3>BMW Série 3</h3>
+
+                <p class="car-details">
+                    2023 • Automático • Flex
+                </p>
+
+                <div class="car-price">
+
+                    <span class="price">R$ 219.900</span>
+
+                    <a href="#anunciar">Ver detalhes</a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- CARRO 3 -->
+        <div class="car-card">
+
+            <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=900&q=80">
+
+            <div class="car-info">
+
+                <h3>Porsche 911</h3>
+
+                <p class="car-details">
+                    2022 • Automático • Gasolina
+                </p>
+
+                <div class="car-price">
+
+                    <span class="price">R$ 699.900</span>
+
+                    <a href="#anunciar">Ver detalhes</a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- VANTAGENS -->
+<section class="benefits" id="vantagens">
+
+    <div class="section-title">
+
+        <h2>Por que escolher a AutoNova?</h2>
+
+        <p>
+            Tecnologia e confiança em todas as etapas da negociação.
+        </p>
+
+    </div>
+
+    <div class="benefit-grid">
+
+        <div class="benefit-card">
+
+            <div class="benefit-icon">🔒</div>
+
+            <h3>Compra segura</h3>
+
+            <p>
+                Uma experiência digital pensada para oferecer
+                mais transparência e segurança nas negociações.
+            </p>
+
+        </div>
+
+        <div class="benefit-card">
+
+            <div class="benefit-icon">⚡</div>
+
+            <h3>Agilidade digital</h3>
+
+            <p>
+                Encontre veículos, compare oportunidades
+                e entre em contato sem sair de casa.
+            </p>
+
+        </div>
+
+        <div class="benefit-card">
+
+            <div class="benefit-icon">🚘</div>
+
+            <h3>Variedade de veículos</h3>
+
+            <p>
+                Diversas marcas e modelos em um único lugar,
+                facilitando sua escolha.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- COMO FUNCIONA -->
+<section id="sobre">
+
+    <div class="section-title">
+
+        <h2>Comprar ficou muito mais fácil</h2>
+
+        <p>
+            Em apenas três passos você encontra seu próximo veículo.
+        </p>
+
+    </div>
+
+    <div class="steps">
+
+        <div class="step">
+
+            <div class="step-number">1</div>
+
+            <h3>Escolha seu veículo</h3>
+
+            <p>
+                Navegue pela plataforma e encontre
+                o carro ideal para você.
+            </p>
+
+        </div>
+
+        <div class="step">
+
+            <div class="step-number">2</div>
+
+            <h3>Entre em contato</h3>
+
+            <p>
+                Consulte informações e converse
+                com o anunciante.
+            </p>
+
+        </div>
+
+        <div class="step">
+
+            <div class="step-number">3</div>
+
+            <h3>Feche negócio</h3>
+
+            <p>
+                Avance com a negociação e prepare-se
+                para dirigir seu novo carro.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ANUNCIAR -->
+<section class="cta" id="anunciar">
+
+    <h2>Quer vender seu veículo?</h2>
+
+    <p>
+        Anuncie na AutoNova e conecte seu veículo
+        a milhares de potenciais compradores.
+    </p>
+
+    <a href="mailto:contato@autonova.com.br"
+       class="hero-button">
+        Quero anunciar meu carro
+    </a>
+
+</section>
+
+<!-- RODAPÉ -->
+<footer>
+
+    <div class="footer-content">
+
+        <div>
+
+            <h3 class="logo">
+                Auto<span>Nova</span>
+            </h3>
+
+            <p>
+                Somos uma startup que acredita que o futuro
+                da compra e venda de veículos é digital.
+                Mais praticidade, tecnologia e novas
+                oportunidades para todos.
+            </p>
+
+        </div>
+
+        <div>
+
+            <h3>Institucional</h3>
+
+            <div class="footer-links">
+
+                <a href="#inicio">Início</a>
+                <a href="#sobre">Sobre nós</a>
+                <a href="#vantagens">Vantagens</a>
+                <a href="#anunciar">Anunciar</a>
+
+            </div>
+
+        </div>
+
+        <div>
+
+            <h3>Contato</h3>
+
+            <div class="footer-links">
+
+                <a href="mailto:contato@autonova.com.br">
+                    E-mail
+                </a>
+
+                <a href="#inicio">
+                    Instagram
+                </a>
+
+                <a href="#inicio">
+                    LinkedIn
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="copyright">
+
+        © 2026 AutoNova. Todos os direitos reservados.
+
+    </div>
+
+</footer>
+
+</body>
+</html>
